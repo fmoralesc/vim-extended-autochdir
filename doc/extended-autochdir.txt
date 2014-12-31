@@ -1,0 +1,17 @@
+                             *vim-extended-autochdir*
+
+Implements a more configurable alternative to vim's |autochdir|.
+
+                                CONFIGURATION  
+
+- *g:autochdir#rules*
+  default = ['&ft != "help"']
+
+- *g:autochdir#path_matches*
+  default = []
+
+- *g:autochdir#home*
+  default = expand('~')
+
+
+
