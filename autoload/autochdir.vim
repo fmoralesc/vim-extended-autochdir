@@ -1,18 +1,21 @@
 function! autochdir#InitRules()
     for rule in g:autochdir#rules
-        exe 'au BufEnter * if '.rule.' | call autochdir#Chdir() | endif'
+        exe 'au BufEnter,BufNewFile * if '.rule.' | call autochdir#Chdir(expand("<amatch>")) | endif'
     endfor
 
     for path_match in g:autochdir#path_matches
-        exe 'au BufEnter '.pmatch.' call autochdir#Chdir()'
+        exe 'au BufEnter,BufNewFile '.pmatch.' call autochdir#Chdir(expand("<amatch>"))'
     endfor
 
-    exe "au BufLeave * cd ".g:autochdir#home
 endfunction
 
-function! autochdir#Chdir()
+function! autochdir#Chdir(file)
+    if a:file == ""
+        exe "lcd ".g:autochdir#home
+        return
+    endif
     try
-        lcd %:h
+        exe "lcd ".fnamemodify(a:file, ":h")
     catch /E499/
         return
     catch /E344/
