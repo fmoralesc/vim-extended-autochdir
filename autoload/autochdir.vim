@@ -12,11 +12,11 @@ endfunction
 
 function! autochdir#Chdir(file)
     if a:file == ""
-        exe "lcd ".g:autochdir#home
+        exe "lcd ".fnameescape(g:autochdir#home)
         return
     endif
     try
-        exe "lcd ".fnamemodify(a:file, ":h")
+        exe "lcd ".fnameescape(fnamemodify(a:file, ":h"))
     catch /E499/
         return
     catch /E344/
