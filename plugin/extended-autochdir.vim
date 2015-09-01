@@ -9,9 +9,14 @@ if !exists('g:autochdir#rules')
     let g:autochdir#rules = ["&ft != 'help'"]
 endif
 
+if !exists('g:autochdir#usehome')
+    let g:autochdir#usehome = 0
+endif
+
 if !exists('g:autochdir#home')
     let g:autochdir#home = expand('~')
 endif
+
 
 " Init: {{{1
 call autochdir#InitRules()
