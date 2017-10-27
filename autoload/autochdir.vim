@@ -1,11 +1,11 @@
 function! autochdir#InitRules()
     augroup autochdir
     for rule in g:autochdir#rules
-        exe 'au BufEnter,BufNewFile * if '.rule.' | call autochdir#Chdir(expand("<amatch>")) | endif'
+        exe 'au BufEnter,BufNewFile,BufWritePost * if '.rule.' | call autochdir#Chdir(expand("<amatch>")) | endif'
     endfor
 
     for path_match in g:autochdir#path_matches
-        exe 'au BufEnter,BufNewFile '.pmatch.' call autochdir#Chdir(expand("<amatch>"))'
+        exe 'au BufEnter,BufNewFile,BufWritePost '.pmatch.' call autochdir#Chdir(expand("<amatch>"))'
     endfor
     augroup END
 endfunction
