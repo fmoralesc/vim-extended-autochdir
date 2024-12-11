@@ -22,7 +22,7 @@ function! autochdir#Chdir(file)
     try
         exe "lcd ".fnameescape(fnamemodify(a:file, ":h"))
     catch /E499/ "empty filename
-        return
+        exe "lcd ~"
     catch /E344/ "can't find directory in cdpath
         return
     catch /E472/ "might occur when using tpope's fugitive
